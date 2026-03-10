@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ article.title }}</h1>
+
+<p class="date">{{ article.date.strftime('%d %B %Y') }}</p>
+
+{% if article.category %}
+<p class="category">Category: {{ article.category }}</p>
+{% endif %}
+
+{% if article.summary %}
+<p>{{ article.summary }}</p>
+{% endif %}
+
+{{ article.content }}
+
+{% endblock %}

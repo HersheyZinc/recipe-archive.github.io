@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Recipe Lab - </title>
+
+<link rel="stylesheet" href="/theme/css/style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1><a href="/">Recipe Lab</a></h1>
+
+<nav>
+
+<a href="/">Recipes</a>
+<a href="/pages/search.html">Search</a>
+
+</nav>
+
+</header>
+
+<main>
+
+
+<h1>Chocolate Chip Cookies</h1>
+<p class="tag">creami</p>
+<p><p>Chewy chocolate chip cookies</p></p>
+<img src="/images/lemon_sorbet_thumb.jpg">
+
+
+<h2>Yield</h2>
+<input id="scale" type="number" value="20" step="0.5" style="width:60px;">
+<span id="yield-display"> (s)</span>
+
+<h2>Ingredients</h2>
+<ul id="ingredients" style="list-style: none">
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="280">
+      <span class="amount">280</span> g all-purpose flour
+    </label>
+</li>
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="1">
+      <span class="amount">1</span> tsp baking soda
+    </label>
+</li>
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="1.5">
+      <span class="amount">1.5</span> tsp cornstarch
+    </label>
+</li>
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="0.5">
+      <span class="amount">0.5</span> tsp salt
+    </label>
+</li>
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="170">
+      <span class="amount">170</span> g unsalted butter (melted & cooled for 5 mins)
+    </label>
+</li>
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="150">
+      <span class="amount">150</span> g brown sugar
+    </label>
+</li>
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="100">
+      <span class="amount">100</span> g caster sugar
+    </label>
+</li>
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="1">
+      <span class="amount">1</span>  egg(s)
+    </label>
+</li>
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="1">
+      <span class="amount">1</span>  egg yolk
+    </label>
+</li>
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="2">
+      <span class="amount">2</span> tsp vanilla extract
+    </label>
+</li>
+<li>
+    <label>
+      <input type="checkbox" class="ingredient-checkbox" data-base="225">
+      <span class="amount">225</span> g semi-sweet chocolate chips
+    </label>
+</li>
+</ul>
+
+<h2>Instructions</h2>
+<ol>
+<li>In a large bowl, whisk the flour, baking soda, cornstarch, and salt together. Set aside.</li>
+<li>In a medium bowl, whisk the melted butter, brown sugar, and caster sugar together until no lumps remain. Whisk in the egg and egg yolk until combined, then whisk in the vanilla extract. Pour into dry ingredients and mix together with a large spoon or spatula. Fold in the chocolate chips.</li>
+<li>Cover the dough tightly and refrigerate for at least 2 hours or up to 3 days.</li>
+<li>Preheat oven to 163°C. Line large baking sheets with parchment paper.</li>
+<li>Add chocolate chips to the top and flaky sea salt (optional).</li>
+<li>Bake cookies for a total of 13 minutes — 7 minutes, remove to round, then bake for another 6 minutes.</li>
+<li>Cool on baking sheet for 10 minutes before transferring to a wire rack.</li>
+</ol>
+
+<script>
+const scaleInput = document.getElementById("scale");
+const ingredientItems = document.querySelectorAll("#ingredients li input.ingredient-checkbox");
+
+// Store original amounts for scaling
+ingredientItems.forEach(input => {
+    input.dataset.baseAmount = parseFloat(input.dataset.base);
+});
+
+// Original yield from metadata
+const originalYield = parseFloat(scaleInput.value);
+
+function updateIngredients() {
+    const desiredYield = parseFloat(scaleInput.value) || originalYield;
+
+    ingredientItems.forEach(input => {
+        const li = input.closest("li");
+        const amountSpan = li.querySelector(".amount");
+        const base = parseFloat(input.dataset.baseAmount);
+
+        // Scale ingredient proportional to yield
+        amountSpan.textContent = ((base / originalYield) * desiredYield).toFixed(2);
+    });
+}
+
+// Initialize ingredients on page load
+updateIngredients();
+
+// Update ingredients when input changes
+scaleInput.addEventListener("input", updateIngredients);
+
+// Checkbox effect
+ingredientItems.forEach(input => {
+    input.addEventListener("change", () => {
+        const li = input.closest("li");
+        if (input.checked) {
+            li.style.textDecoration = "line-through";
+            li.style.opacity = "0.6";
+        } else {
+            li.style.textDecoration = "none";
+            li.style.opacity = "1";
+        }
+    });
+});
+</script>
+
+
+</main>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Recipes</h1>
+
+{% for article in articles %}
+
+<div class="recipe-card">
+
+<a href="{{ article.url }}">
+
+<img src="{{ article.metadata.thumbnail }}">
+
+<h3>{{ article.title }}</h3>
+
+</a>
+
+<p>{{ article.summary }}</p>
+
+<span class="tag">{{ article.category }}</span>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
