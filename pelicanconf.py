@@ -1,10 +1,10 @@
 AUTHOR = 'Zhe Xun'
 SITENAME = 'Recipe Lab'
 SITEURL = ""
-THEME = "themes/recipes"
+THEME = "pelican-themes/bricks"
 PATH = "content"
-ARTICLE_PATHS = ['recipes']
-
+THEME_TEMPLATES_OVERRIDES = ["templates"]
+STATIC_PATHS = ['images']
 TIMEZONE = 'Asia/Singapore'
 
 DEFAULT_LANG = 'en'
