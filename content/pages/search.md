@@ -1,4 +1,4 @@
 Title: Search
-Date: 2026-03-10
-
-Search page coming soon.
+Slug: search
+Date: 2026-04-20
+Template: search

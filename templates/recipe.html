@@ -2,6 +2,9 @@
 
 {% block content %}
 
+{% set pan_radius = article.metadata.pan_radius | default(0) %}
+{% set pan_length = article.metadata.pan_length | default(0) %}
+{% set pan_width = article.metadata.pan_width | default(0) %}
 <div class="recipe-layout">
 
     <div class="recipe-main">
@@ -22,7 +25,37 @@
         <span id="yield-display">
         {{ article.metadata.yield_unit }}(s)
         </span>
-    
+
+
+        {% if pan_radius|float > 0 %}
+            <h3>Round Pan Size</h3>
+            <input id="pan-radius"
+                type="number"
+                value="{{ pan_radius }}"
+                step="1"
+                style="width:60px;">
+            <span>inch diameter</span>
+        {% endif %}
+
+
+        {% if pan_length|float > 0 and pan_width|float > 0 %}
+            <h3>Rectangular Pan Size</h3>
+            <input id="pan-length"
+                type="number"
+                value="{{ pan_length }}"
+                step="1"
+                style="width:60px;">
+            <span> × </span>
+            <input id="pan-width"
+                type="number"
+                value="{{ pan_width }}"
+                step="1"
+                style="width:60px;">
+            <span>inch</span>
+        {% endif %}
+
+
+        
         <h2>Ingredients</h2>
     
         <ul id="ingredients" style="list-style: none">
@@ -52,34 +85,99 @@
 
 <script>
 const scaleInput = document.getElementById("scale");
+
+const panRadiusInput = document.getElementById("pan-radius");
+const panLengthInput = document.getElementById("pan-length");
+const panWidthInput = document.getElementById("pan-width");
+
 const ingredientItems = document.querySelectorAll("#ingredients li input.ingredient-checkbox");
 
-// Store original amounts for scaling
+
+// --- SAFE PARSER ---
+function safeFloat(value, fallback = 0) {
+    const n = parseFloat(value);
+    return isNaN(n) ? fallback : n;
+}
+
+
+// --- INITIAL VALUES ---
+const originalYield = safeFloat(scaleInput.value, 1);
+
+const originalRadius = panRadiusInput ? safeFloat(panRadiusInput.value, 0) : 0;
+const originalLength = panLengthInput ? safeFloat(panLengthInput.value, 0) : 0;
+const originalWidth = panWidthInput ? safeFloat(panWidthInput.value, 0) : 0;
+
+
+// --- STORE BASE INGREDIENTS ---
 ingredientItems.forEach(input => {
-    input.dataset.baseAmount = parseFloat(input.dataset.base);
+    input.dataset.baseAmount = safeFloat(input.dataset.base, 0);
 });
 
-// Original yield from metadata
-const originalYield = parseFloat(scaleInput.value);
 
+// --- ROUND PAN ---
+function getRoundModifier() {
+    if (!panRadiusInput || originalRadius === 0) return 1;
+
+    const newRadius = safeFloat(panRadiusInput.value, originalRadius);
+
+    return Math.pow(newRadius / originalRadius, 2);
+}
+
+
+// --- RECTANGULAR PAN ---
+function getRectModifier() {
+    if (!panLengthInput || !panWidthInput) return 1;
+    if (originalLength === 0 || originalWidth === 0) return 1;
+
+    const newL = safeFloat(panLengthInput.value, originalLength);
+    const newW = safeFloat(panWidthInput.value, originalWidth);
+
+    return (newL * newW) / (originalLength * originalWidth);
+}
+
+
+// --- MAIN ---
 function updateIngredients() {
-    const desiredYield = parseFloat(scaleInput.value) || originalYield;
+
+    const desiredYield = safeFloat(scaleInput.value, originalYield);
+
+    const rect = getRectModifier();
+    const round = getRoundModifier();
+
+    const panModifier = rect !== 1 ? rect : round;
 
     ingredientItems.forEach(input => {
+
         const li = input.closest("li");
         const amountSpan = li.querySelector(".amount");
-        const base = parseFloat(input.dataset.baseAmount);
 
-        // Scale ingredient proportional to yield
-        amountSpan.textContent = ((base / originalYield) * desiredYield).toFixed(2);
+        const base = safeFloat(input.dataset.baseAmount, 0);
+
+        const scaled = (base / originalYield) * desiredYield * panModifier;
+
+        amountSpan.textContent = scaled.toFixed(2);
     });
 }
 
-// Initialize ingredients on page load
+
+// --- INIT ---
 updateIngredients();
 
-// Update ingredients when input changes
+
+// --- EVENTS ---
 scaleInput.addEventListener("input", updateIngredients);
+
+if (panRadiusInput) {
+    panRadiusInput.addEventListener("input", updateIngredients);
+}
+
+if (panLengthInput) {
+    panLengthInput.addEventListener("input", updateIngredients);
+}
+
+if (panWidthInput) {
+    panWidthInput.addEventListener("input", updateIngredients);
+}
 
 // Checkbox effect
 ingredientItems.forEach(input => {

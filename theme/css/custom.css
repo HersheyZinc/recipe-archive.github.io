@@ -5,6 +5,6 @@
   padding:8px; transition:0.15s;
 }
 .recipe-card:hover { box-shadow:0 4px 8px rgba(0,0,0,0.1); transform:translateY(-2px); }
-.recipe-thumb { width:100%; height:150px; object-fit:cover; border-radius:6px; }
+.recipe-thumb {width: 512px; height: 512px; object-fit: cover; object-position: center;}
 .recipe-info { padding-top:8px; }
 .tag { font-size:0.75rem; padding:2px 6px; border-radius:6px; background:#eee; }

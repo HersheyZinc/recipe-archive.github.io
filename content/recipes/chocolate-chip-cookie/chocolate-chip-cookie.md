@@ -7,6 +7,9 @@ Thumbnail: images/test.jpg
 Image: images/test.jpg
 Yield_Amount: 20
 Yield_Unit: cookie
+Pan_Radius: 0
+Pan_Length: 0
+Pan_Width: 0
 Ingredients: [{"id":"flour","name":"all-purpose flour","amount":280,"unit":"g"},{"id":"baking_soda","name":"baking soda","amount":1,"unit":"tsp"},{"id":"cornstarch","name":"cornstarch","amount":1.5,"unit":"tsp"},{"id":"salt","name":"salt","amount":0.5,"unit":"tsp"},{"id":"butter","name":"unsalted butter (melted & cooled for 5 mins)","amount":170,"unit":"g"},{"id":"brown_sugar","name":"brown sugar","amount":150,"unit":"g"},{"id":"caster_sugar","name":"caster sugar","amount":100,"unit":"g"},{"id":"egg","name":"egg(s)","amount":1,"unit":""},{"id":"egg_yolk","name":"egg yolk","amount":1,"unit":""},{"id":"vanilla","name":"vanilla extract","amount":2,"unit":"tsp"},{"id":"choc_chips","name":"semi-sweet chocolate chips","amount":225,"unit":"g"}]
 
 1. In a large bowl, whisk the flour, baking soda, cornstarch, and salt together. Set aside.
