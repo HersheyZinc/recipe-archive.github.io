@@ -1,74 +1,132 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>Recipe Lab</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    </head>
 
-<head>
-
-<meta charset="utf-8">
-
-<title>Recipe Lab - </title>
-
-<link rel="stylesheet" href="/theme/css/style.css">
-
-</head>
-
-<body>
-
-<header>
-
-<h1><a href="/">Recipe Lab</a></h1>
-
-<nav>
-
-<a href="/">Recipes</a>
-<a href="/pages/search.html">Search</a>
-
-</nav>
-
-</header>
-
-<main>
-
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="">Home</a></li>
+                    <li><a href="/pages/search.html">Search</a></li>
+                    <li><a href="/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="">Recipe Lab</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
 
 <h1>Recipes</h1>
 
+<div class="recipe-grid">
 
-<div class="recipe-card">
 
-<a href="chocolate-chip-cookies.html">
+<a class="recipe-card" href="focaccia.html">
 
-<img src="images/lemon_sorbet_thumb.jpg">
+<img class="recipe-thumb" src="/images/foccacia1.jpg">
 
-<h3>Chocolate Chip Cookies</h3>
+<div class="recipe-info">
+
+<div class="recipe-header">
+
+<h3 class="recipe-title">Focaccia</h3>
+
+<span class="tag">baking</span>
+
+</div>
+
+<p class="recipe-desc">
+<p>Focaccia</p>
+</p>
+
+</div>
 
 </a>
 
-<p><p>Chewy chocolate chip cookies</p></p>
+
+<a class="recipe-card" href="salt-bread.html">
+
+<img class="recipe-thumb" src="/images/saltbread2.jpg">
+
+<div class="recipe-info">
+
+<div class="recipe-header">
+
+<h3 class="recipe-title">Salt Bread</h3>
+
+<span class="tag">baking</span>
+
+</div>
+
+<p class="recipe-desc">
+<p>Salt Bread</p>
+</p>
+
+</div>
+
+</a>
+
+
+<a class="recipe-card" href="chocolate-chip-cookies.html">
+
+<img class="recipe-thumb" src="/images/test.jpg">
+
+<div class="recipe-info">
+
+<div class="recipe-header">
+
+<h3 class="recipe-title">Chocolate Chip Cookies</h3>
+
+<span class="tag">baking</span>
+
+</div>
+
+<p class="recipe-desc">
+<p>Chewy chocolate chip cookies</p>
+</p>
+
+</div>
+
+</a>
+
+
+<a class="recipe-card" href="lemon-sorbet.html">
+
+<img class="recipe-thumb" src="/images/test.jpg">
+
+<div class="recipe-info">
+
+<div class="recipe-header">
+
+<h3 class="recipe-title">Lemon Sorbet</h3>
 
 <span class="tag">creami</span>
 
 </div>
 
-
-<div class="recipe-card">
-
-<a href="lemon-sorbet.html">
-
-<img src="images/lemon_sorbet_thumb.jpg">
-
-<h3>Lemon Sorbet</h3>
-
-</a>
-
-<p><p>Milky lemon sorbet that tastes like yakult</p></p>
-
-<span class="tag">creami</span>
+<p class="recipe-desc">
+<p>Milky lemon sorbet that tastes like yakult</p>
+</p>
 
 </div>
 
+</a>
 
 
-</main>
+</div>
 
-</body>
-
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="/None">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="">Recipe Lab</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
 </html>

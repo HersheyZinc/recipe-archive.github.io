@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Focaccia - Recipe Lab</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="">Home</a></li>
+                    <li><a href="/pages/search.html">Search</a></li>
+                    <li><a href="/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="">Recipe Lab</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+
+<div class="recipe-layout">
+
+    <div class="recipe-main">
+    
+        <h1>Focaccia</h1>
+    
+        <p><p>Focaccia</p></p>
+    
+        <p class="tag">baking</p>
+    
+        <h3>Yield</h3>
+    
+        <input id="scale" type="number"
+            value="2"
+            step="1"
+            style="width:60px;">
+    
+        <span id="yield-display">
+        loaf(s)
+        </span>
+
+
+
+
+            <h3>Rectangular Pan Size</h3>
+            <input id="pan-length"
+                type="number"
+                value="9"
+                step="1"
+                style="width:60px;">
+            <span> × </span>
+            <input id="pan-width"
+                type="number"
+                value="9"
+                step="1"
+                style="width:60px;">
+            <span>inch</span>
+
+
+        
+        <h2>Ingredients</h2>
+    
+        <ul id="ingredients" style="list-style: none">
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="500">
+                  <span class="amount">500</span> g bread flour
+                </label>
+            </li>
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="10">
+                  <span class="amount">10</span> g salt
+                </label>
+            </li>
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="5">
+                  <span class="amount">5</span> g yeast
+                </label>
+            </li>
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="450">
+                  <span class="amount">450</span> g water
+                </label>
+            </li>
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="25">
+                  <span class="amount">25</span> g olive oil
+                </label>
+            </li>
+        </ul>
+    
+    </div>
+    
+    <div class="recipe-image">
+        <img src="/images/foccacia2.jpg">
+    </div>
+    
+</div>
+    
+<h2>Instructions</h2>
+    
+<ol>
+<li>In a big bowl, combine flour + yeast. </li>
+<li>Add water, mix with a spoon until flour is worked in </li>
+<li>Add salt and olive oil, and gently mix in (it will be goopy). Let it rest for 15 mins</li>
+<li>Do 4 sets of coil folds every 25 minutes </li>
+<li>With wet hands, lift one side of the dough, let it stretch and fold it under itself. Rotate and repeat on all sides. Cover with damp towel between sets</li>
+<li>Cover the bowl tightly and refrigerate for 12-48hrs. It should rise a bit and be full of bubbles. 24 hours is a good amount of time </li>
+<li>Generously oil your pan (don’t skimp, at least 2-3tbsp) </li>
+<li>Gently pour the cold dough into the pan. Don’t deflate it. Add a drizzle of olive oil on top.</li>
+<li>Let it proof at room temp for 4-5hrs until it’s puffy and bubbly </li>
+<li>Preheat oven to 232℃ </li>
+<li>With oiled fingers, dimple the dough. Top with flaky salt, rosemary, garlic. </li>
+<li>Drizzle more olive oil on top to help crisp the surface</li>
+<li>Bake for 20-25mins until deeply golden and crisp </li>
+<li>Cool in pan for at least 10min before removing</li>
+</ol>
+
+<script>
+const scaleInput = document.getElementById("scale");
+
+const panRadiusInput = document.getElementById("pan-radius");
+const panLengthInput = document.getElementById("pan-length");
+const panWidthInput = document.getElementById("pan-width");
+
+const ingredientItems = document.querySelectorAll("#ingredients li input.ingredient-checkbox");
+
+
+// --- SAFE PARSER ---
+function safeFloat(value, fallback = 0) {
+    const n = parseFloat(value);
+    return isNaN(n) ? fallback : n;
+}
+
+
+// --- INITIAL VALUES ---
+const originalYield = safeFloat(scaleInput.value, 1);
+
+const originalRadius = panRadiusInput ? safeFloat(panRadiusInput.value, 0) : 0;
+const originalLength = panLengthInput ? safeFloat(panLengthInput.value, 0) : 0;
+const originalWidth = panWidthInput ? safeFloat(panWidthInput.value, 0) : 0;
+
+
+// --- STORE BASE INGREDIENTS ---
+ingredientItems.forEach(input => {
+    input.dataset.baseAmount = safeFloat(input.dataset.base, 0);
+});
+
+
+// --- ROUND PAN ---
+function getRoundModifier() {
+    if (!panRadiusInput || originalRadius === 0) return 1;
+
+    const newRadius = safeFloat(panRadiusInput.value, originalRadius);
+
+    return Math.pow(newRadius / originalRadius, 2);
+}
+
+
+// --- RECTANGULAR PAN ---
+function getRectModifier() {
+    if (!panLengthInput || !panWidthInput) return 1;
+    if (originalLength === 0 || originalWidth === 0) return 1;
+
+    const newL = safeFloat(panLengthInput.value, originalLength);
+    const newW = safeFloat(panWidthInput.value, originalWidth);
+
+    return (newL * newW) / (originalLength * originalWidth);
+}
+
+
+// --- MAIN ---
+function updateIngredients() {
+
+    const desiredYield = safeFloat(scaleInput.value, originalYield);
+
+    const rect = getRectModifier();
+    const round = getRoundModifier();
+
+    const panModifier = rect !== 1 ? rect : round;
+
+    ingredientItems.forEach(input => {
+
+        const li = input.closest("li");
+        const amountSpan = li.querySelector(".amount");
+
+        const base = safeFloat(input.dataset.baseAmount, 0);
+
+        const scaled = (base / originalYield) * desiredYield * panModifier;
+
+        amountSpan.textContent = scaled.toFixed(2);
+    });
+}
+
+
+// --- INIT ---
+updateIngredients();
+
+
+// --- EVENTS ---
+scaleInput.addEventListener("input", updateIngredients);
+
+if (panRadiusInput) {
+    panRadiusInput.addEventListener("input", updateIngredients);
+}
+
+if (panLengthInput) {
+    panLengthInput.addEventListener("input", updateIngredients);
+}
+
+if (panWidthInput) {
+    panWidthInput.addEventListener("input", updateIngredients);
+}
+
+// Checkbox effect
+ingredientItems.forEach(input => {
+    input.addEventListener("change", () => {
+        const li = input.closest("li");
+        if (input.checked) {
+            li.style.textDecoration = "line-through";
+            li.style.opacity = "0.6";
+        } else {
+            li.style.textDecoration = "none";
+            li.style.opacity = "1";
+        }
+    });
+});
+</script>
+
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="/None">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="">Recipe Lab</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>

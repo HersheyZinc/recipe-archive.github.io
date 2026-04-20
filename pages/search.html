@@ -1,45 +1,117 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>Recipe Lab</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    </head>
 
-<head>
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="">Home</a></li>
+                    <li class="active"><a href="/pages/search.html">Search</a></li>
+                    <li><a href="/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="">Recipe Lab</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
 
-<meta charset="utf-8">
+<h1>Search Recipes</h1>
 
-<title>Recipe Lab - Search</title>
+<input type="text" id="searchBox" placeholder="Search recipes..." />
 
-<link rel="stylesheet" href="/theme/css/style.css">
+<div class="recipe-grid">
 
-</head>
+<a class="recipe-card"
+   href="focaccia.html"
+   data-title="focaccia"
+   data-category="baking">
 
-<body>
+    <img class="recipe-thumb" src="/images/foccacia1.jpg">
 
-<header>
+    <div class="recipe-info">
+        <h3>Focaccia</h3>
+        <span class="tag">baking</span>
+        <p><p>Focaccia</p></p>
+    </div>
 
-<h1><a href="/">Recipe Lab</a></h1>
+</a>
+<a class="recipe-card"
+   href="salt-bread.html"
+   data-title="salt bread"
+   data-category="baking">
 
-<nav>
+    <img class="recipe-thumb" src="/images/saltbread2.jpg">
 
-<a href="/">Recipes</a>
-<a href="/pages/search.html">Search</a>
+    <div class="recipe-info">
+        <h3>Salt Bread</h3>
+        <span class="tag">baking</span>
+        <p><p>Salt Bread</p></p>
+    </div>
 
-</nav>
+</a>
+<a class="recipe-card"
+   href="chocolate-chip-cookies.html"
+   data-title="chocolate chip cookies"
+   data-category="baking">
 
-</header>
+    <img class="recipe-thumb" src="/images/test.jpg">
 
-<main>
+    <div class="recipe-info">
+        <h3>Chocolate Chip Cookies</h3>
+        <span class="tag">baking</span>
+        <p><p>Chewy chocolate chip cookies</p></p>
+    </div>
 
-  <article>
-    <header>
-      <h2>Search</h2>
-    </header>
-    
+</a>
+<a class="recipe-card"
+   href="lemon-sorbet.html"
+   data-title="lemon sorbet"
+   data-category="creami">
 
-    <p>Search page coming soon.</p>
+    <img class="recipe-thumb" src="/images/test.jpg">
 
-  </article>
+    <div class="recipe-info">
+        <h3>Lemon Sorbet</h3>
+        <span class="tag">creami</span>
+        <p><p>Milky lemon sorbet that tastes like yakult</p></p>
+    </div>
 
-</main>
+</a>
 
-</body>
+</div>
 
+<script>
+const searchBox = document.getElementById("searchBox");
+const cards = document.querySelectorAll(".recipe-card");
+
+searchBox.addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+
+    cards.forEach(card => {
+        const title = card.dataset.title;
+        const category = card.dataset.category;
+
+        card.style.display =
+            (title.includes(query) || category.includes(query))
+            ? "block"
+            : "none";
+    });
+});
+</script>
+
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="/None">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="">Recipe Lab</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
 </html>
