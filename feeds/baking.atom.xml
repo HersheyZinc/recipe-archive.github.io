@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Recipe Lab</title><link href="https://hersheyzinc.github.io/recipe-archive.github.io/" rel="alternate"/><link href="https://hersheyzinc.github.io/recipe-archive.github.io/feeds/all.atom.xml" rel="self"/><id>https://hersheyzinc.github.io/recipe-archive.github.io/</id><updated>2026-04-20T00:00:00+08:00</updated><entry><title>Focaccia</title><link href="https://hersheyzinc.github.io/recipe-archive.github.io/focaccia.html" rel="alternate"/><published>2026-04-20T00:00:00+08:00</published><updated>2026-04-20T00:00:00+08:00</updated><author><name>Zhe Xun</name></author><id>tag:hersheyzinc.github.io,2026-04-20:/recipe-archive.github.io/focaccia.html</id><summary type="html">&lt;p&gt;Focaccia&lt;/p&gt;</summary><content type="html">&lt;ol&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Recipe Lab - baking</title><link href="https://hersheyzinc.github.io/recipe-archive.github.io/" rel="alternate"/><link href="https://hersheyzinc.github.io/recipe-archive.github.io/feeds/baking.atom.xml" rel="self"/><id>https://hersheyzinc.github.io/recipe-archive.github.io/</id><updated>2026-04-20T00:00:00+08:00</updated><entry><title>Focaccia</title><link href="https://hersheyzinc.github.io/recipe-archive.github.io/focaccia.html" rel="alternate"/><published>2026-04-20T00:00:00+08:00</published><updated>2026-04-20T00:00:00+08:00</updated><author><name>Zhe Xun</name></author><id>tag:hersheyzinc.github.io,2026-04-20:/recipe-archive.github.io/focaccia.html</id><summary type="html">&lt;p&gt;Focaccia&lt;/p&gt;</summary><content type="html">&lt;ol&gt;
 &lt;li&gt;In a big bowl, combine flour + yeast. &lt;/li&gt;
 &lt;li&gt;Add water, mix with a spoon until flour is worked in &lt;/li&gt;
 &lt;li&gt;Add salt and olive oil, and gently mix in (it will be goopy). Let it rest for 15 mins&lt;/li&gt;
@@ -44,14 +44,4 @@ Remember to flour your working surface when kneading, cutting and rolling to pre
 &lt;li&gt;Add chocolate chips to the top and flaky sea salt (optional).&lt;/li&gt;
 &lt;li&gt;Bake cookies for a total of 13 minutes — 7 minutes, remove to round, then bake for another 6 minutes.&lt;/li&gt;
 &lt;li&gt;Cool on baking sheet for 10 minutes before transferring to a wire rack.&lt;/li&gt;
-&lt;/ol&gt;</content><category term="baking"/></entry><entry><title>Lemon Sorbet</title><link href="https://hersheyzinc.github.io/recipe-archive.github.io/lemon-sorbet.html" rel="alternate"/><published>2026-03-10T00:00:00+08:00</published><updated>2026-03-10T00:00:00+08:00</updated><author><name>Zhe Xun</name></author><id>tag:hersheyzinc.github.io,2026-03-10:/recipe-archive.github.io/lemon-sorbet.html</id><summary type="html">&lt;p&gt;Milky lemon sorbet that tastes like yakult&lt;/p&gt;</summary><content type="html">&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;In a large bowl, whisk together all the ingredients until fully combined.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Pour base into creami pint and freeze for 24 hours.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Spin on &lt;strong&gt;Sorbet&lt;/strong&gt; mode.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;</content><category term="creami"/></entry></feed>
+&lt;/ol&gt;</content><category term="baking"/></entry></feed>
