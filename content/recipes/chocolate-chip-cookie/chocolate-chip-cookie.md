@@ -3,8 +3,6 @@ Date: 2026-03-10
 Category: baking
 Template: recipe
 Summary: Chewy chocolate chip cookies
-Thumbnail: images/test.jpg
-Image: images/test.jpg
 Yield_Amount: 20
 Yield_Unit: cookie
 Pan_Radius: 0

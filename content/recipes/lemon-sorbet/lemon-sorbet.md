@@ -3,8 +3,6 @@ Date: 2026-03-10
 Category: creami
 Template: recipe
 Summary: Milky lemon sorbet that tastes like yakult
-Thumbnail: images/test.jpg
-Image: images/test.jpg
 Yield_Amount: 1
 Yield_Unit: pint
 Pan_Radius: 0

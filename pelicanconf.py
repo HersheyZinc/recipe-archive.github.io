@@ -3,10 +3,8 @@ SITENAME = 'Recipe Lab'
 SITEURL = ""
 THEME = "pelican-themes/simple-bootstrap"
 PATH = "content"
-EXTRA_PATH_METADATA = {"extra/custom.css": {"path": "theme/css/custom.css"},}
 THEME_TEMPLATES_OVERRIDES = ["templates"]
-STATIC_PATHS = ['images']
-PAGE_PATHS = ['pages']
+STATIC_PATHS = ["recipes"]
 ARTICLE_PATHS = ['recipes']
 TIMEZONE = 'Asia/Singapore'
 

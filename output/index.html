@@ -4,128 +4,150 @@
         <title>Recipe Lab</title>
         <meta charset="utf-8" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="/theme/css/custom.css" rel="stylesheet" />
+        <link href="https://hersheyzinc.github.io/recipe-archive.github.io/theme/css/custom.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     </head>
 
     <body id="index" class="archive">
         <div class="container">
             <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class=""><a href="">Home</a></li>
-                    <li><a href="/pages/search.html">Search</a></li>
-                    <li><a href="/archives.html">Archives</a></li>
-                </ul>
-                <h3 class="text-muted"><a href="">Recipe Lab</a></h3>
-				<h2 class="text-muted"></h2>
-             </div>
+                <h3 class="text-muted"><a href="https://hersheyzinc.github.io/recipe-archive.github.io/index.html">Recipe Lab</a></h3>
+                <h2 class="text-muted"></h2>
+            </div>
 
-<h1>Recipes</h1>
+<h1>Search Recipes</h1>
+
+<input type="text" id="searchBox" placeholder="Search recipes..." />
+
+<select id="categoryFilter">
+    <option value="">All Categories</option>
+        <option value="baking">baking</option>
+        <option value="brewing">brewing</option>
+        <option value="creami">creami</option>
+</select>
 
 <div class="recipe-grid">
 
+<a class="recipe-card"
+   href="https://hersheyzinc.github.io/recipe-archive.github.io/mead.html"
+   data-title="mead"
+   data-category="brewing">
 
-<a class="recipe-card" href="focaccia.html">
 
-<img class="recipe-thumb" src="/images/foccacia1.jpg">
+    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/plain-mead/thumbnail.jpg" alt="Mead">
 
-<div class="recipe-info">
+    <div class="recipe-info">
+        <h3>Mead</h3>
+        <span class="tag tag-brewing">
+            brewing
+        </span>
+        <p><p>Plain mead</p></p>
+    </div>
 
-<div class="recipe-header">
+</a>
+<a class="recipe-card"
+   href="https://hersheyzinc.github.io/recipe-archive.github.io/focaccia.html"
+   data-title="focaccia"
+   data-category="baking">
 
-<h3 class="recipe-title">Focaccia</h3>
 
-<span class="tag">baking</span>
+    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/foccacia/thumbnail.jpg" alt="Focaccia">
 
-</div>
+    <div class="recipe-info">
+        <h3>Focaccia</h3>
+        <span class="tag tag-baking">
+            baking
+        </span>
+        <p><p>Focaccia</p></p>
+    </div>
 
-<p class="recipe-desc">
-<p>Focaccia</p>
-</p>
+</a>
+<a class="recipe-card"
+   href="https://hersheyzinc.github.io/recipe-archive.github.io/salt-bread.html"
+   data-title="salt bread"
+   data-category="baking">
 
-</div>
+
+    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/salt-bread/thumbnail.jpg" alt="Salt Bread">
+
+    <div class="recipe-info">
+        <h3>Salt Bread</h3>
+        <span class="tag tag-baking">
+            baking
+        </span>
+        <p><p>Salt Bread</p></p>
+    </div>
+
+</a>
+<a class="recipe-card"
+   href="https://hersheyzinc.github.io/recipe-archive.github.io/chocolate-chip-cookies.html"
+   data-title="chocolate chip cookies"
+   data-category="baking">
+
+
+    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/chocolate-chip-cookie/thumbnail.jpg" alt="Chocolate Chip Cookies">
+
+    <div class="recipe-info">
+        <h3>Chocolate Chip Cookies</h3>
+        <span class="tag tag-baking">
+            baking
+        </span>
+        <p><p>Chewy chocolate chip cookies</p></p>
+    </div>
+
+</a>
+<a class="recipe-card"
+   href="https://hersheyzinc.github.io/recipe-archive.github.io/lemon-sorbet.html"
+   data-title="lemon sorbet"
+   data-category="creami">
+
+
+    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/lemon-sorbet/thumbnail.jpg" alt="Lemon Sorbet">
+
+    <div class="recipe-info">
+        <h3>Lemon Sorbet</h3>
+        <span class="tag tag-creami">
+            creami
+        </span>
+        <p><p>Milky lemon sorbet that tastes like yakult</p></p>
+    </div>
 
 </a>
 
-
-<a class="recipe-card" href="salt-bread.html">
-
-<img class="recipe-thumb" src="/images/saltbread2.jpg">
-
-<div class="recipe-info">
-
-<div class="recipe-header">
-
-<h3 class="recipe-title">Salt Bread</h3>
-
-<span class="tag">baking</span>
-
 </div>
 
-<p class="recipe-desc">
-<p>Salt Bread</p>
-</p>
+<script>
+    const searchBox = document.getElementById("searchBox");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const cards = document.querySelectorAll(".recipe-card");
 
-</div>
+    function filterRecipes() {
+        const query = searchBox.value.toLowerCase();
+        const selected = categoryFilter.value;
 
-</a>
+        cards.forEach(card => {
+            const title = card.dataset.title;
+            const category = card.dataset.category;
 
+            const matchesSearch =
+                title.includes(query) || category.includes(query);
 
-<a class="recipe-card" href="chocolate-chip-cookies.html">
+            const matchesCategory =
+                selected === "" || category === selected;
 
-<img class="recipe-thumb" src="/images/test.jpg">
+            card.style.display =
+                matchesSearch && matchesCategory
+                ? "block"
+                : "none";
+        });
+    }
 
-<div class="recipe-info">
-
-<div class="recipe-header">
-
-<h3 class="recipe-title">Chocolate Chip Cookies</h3>
-
-<span class="tag">baking</span>
-
-</div>
-
-<p class="recipe-desc">
-<p>Chewy chocolate chip cookies</p>
-</p>
-
-</div>
-
-</a>
-
-
-<a class="recipe-card" href="lemon-sorbet.html">
-
-<img class="recipe-thumb" src="/images/test.jpg">
-
-<div class="recipe-info">
-
-<div class="recipe-header">
-
-<h3 class="recipe-title">Lemon Sorbet</h3>
-
-<span class="tag">creami</span>
-
-</div>
-
-<p class="recipe-desc">
-<p>Milky lemon sorbet that tastes like yakult</p>
-</p>
-
-</div>
-
-</a>
-
-
-</div>
+    searchBox.addEventListener("input", filterRecipes);
+    categoryFilter.addEventListener("change", filterRecipes);
+</script>
 
             <footer id="contentinfo" class="footer">
-                    <nav class="pull-right bottom-nav">
-                        <a href="/None">RSS</a>
-                    </nav>
-                    <address id="about" class="vcard body">
-                    &copy; <a href="">Recipe Lab</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
-                    </address><!-- /#about -->
+
             </footer><!-- /#contentinfo -->
         </div><!-- container -->
     </body>

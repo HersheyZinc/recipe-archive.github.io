@@ -2,36 +2,70 @@
 
 {% block content %}
 
-<h1>Recipes</h1>
+<h1>Search Recipes</h1>
+
+<input type="text" id="searchBox" placeholder="Search recipes..." />
+
+<select id="categoryFilter">
+    <option value="">All Categories</option>
+    {% for category, articles in categories %}
+        <option value="{{ category|lower }}">{{ category }}</option>
+    {% endfor %}
+</select>
 
 <div class="recipe-grid">
 
 {% for article in articles %}
+<a class="recipe-card"
+   href="{{ SITEURL }}/{{ article.url }}"
+   data-title="{{ article.title | lower }}"
+   data-category="{{ article.category | lower }}">
 
-<a class="recipe-card" href="{{ article.url }}">
+   {% set recipe_dir = article.source_path.replace('\\', '/').split('/content/', 1)[1].rsplit('/', 1)[0] %}
 
-<img class="recipe-thumb" src="/{{ article.metadata.thumbnail }}">
+    <img class="recipe-thumb" src="{{ SITEURL }}/{{ recipe_dir }}/thumbnail.jpg" alt="{{ article.title }}">
 
-<div class="recipe-info">
-
-<div class="recipe-header">
-
-<h3 class="recipe-title">{{ article.title }}</h3>
-
-<span class="tag">{{ article.category }}</span>
-
-</div>
-
-<p class="recipe-desc">
-{{ article.summary }}
-</p>
-
-</div>
+    <div class="recipe-info">
+        <h3>{{ article.title }}</h3>
+        <span class="tag tag-{{ article.category|lower|replace(' ', '-') }}">
+            {{ article.category }}
+        </span>
+        <p>{{ article.summary }}</p>
+    </div>
 
 </a>
-
 {% endfor %}
 
 </div>
+
+<script>
+    const searchBox = document.getElementById("searchBox");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const cards = document.querySelectorAll(".recipe-card");
+
+    function filterRecipes() {
+        const query = searchBox.value.toLowerCase();
+        const selected = categoryFilter.value;
+
+        cards.forEach(card => {
+            const title = card.dataset.title;
+            const category = card.dataset.category;
+
+            const matchesSearch =
+                title.includes(query) || category.includes(query);
+
+            const matchesCategory =
+                selected === "" || category === selected;
+
+            card.style.display =
+                matchesSearch && matchesCategory
+                ? "block"
+                : "none";
+        });
+    }
+
+    searchBox.addEventListener("input", filterRecipes);
+    categoryFilter.addEventListener("change", filterRecipes);
+</script>
 
 {% endblock %}

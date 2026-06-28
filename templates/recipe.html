@@ -74,7 +74,9 @@
     </div>
     
     <div>
-        <img src="/{{ article.metadata.image }}" class="recipe-image">
+        {% set recipe_dir = article.source_path.replace('\\', '/').split('/content/', 1)[1].rsplit('/', 1)[0] %}
+
+        <img class="recipe-image" src="{{ SITEURL }}/{{ recipe_dir }}/image.jpg" alt="{{ article.title }}">
     </div>
     
 </div>

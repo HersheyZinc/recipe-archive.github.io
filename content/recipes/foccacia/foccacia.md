@@ -3,8 +3,6 @@ Date: 2026-04-20
 Category: baking
 Template: recipe
 Summary: Focaccia 
-Thumbnail: images/foccacia1.jpg
-Image: images/foccacia2.jpg
 Yield_Amount: 2
 Pan_Radius: 0
 Pan_Length: 9

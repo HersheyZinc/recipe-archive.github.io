@@ -3,8 +3,6 @@ Date: 2026-04-20
 Category: baking
 Template: recipe
 Summary: Salt Bread
-Thumbnail: images/saltbread2.jpg
-Image: images/saltbread1.jpg
 Yield_Amount: 12
 Yield_Unit: rolls
 Pan_Radius: 0
