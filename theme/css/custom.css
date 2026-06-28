@@ -92,6 +92,22 @@
     color: #555;
 }
 
+.tag-baking {
+    background: #92f37ec0;
+}
+
+.tag-creami {
+    background: #73f3fc;
+}
+
+.tag-cooking {
+    background: #b60ee9;
+}
+
+.tag-brewing {
+    background: #b1713d;
+}
+
 /* =========================
    Recipe Page
    ========================= */

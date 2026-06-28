@@ -19,18 +19,45 @@
 
 <input type="text" id="searchBox" placeholder="Search recipes..." />
 
+<select id="categoryFilter">
+    <option value="">All Categories</option>
+        <option value="baking">baking</option>
+        <option value="brewing">brewing</option>
+        <option value="creami">creami</option>
+</select>
+
 <div class="recipe-grid">
 
+<a class="recipe-card"
+   href="https://hersheyzinc.github.io/recipe-archive.github.io/mead.html"
+   data-title="mead"
+   data-category="brewing">
+
+
+    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/plain-mead/thumbnail.jpg" alt="Mead">
+
+    <div class="recipe-info">
+        <h3>Mead</h3>
+        <span class="tag tag-brewing">
+            brewing
+        </span>
+        <p><p>Plain mead</p></p>
+    </div>
+
+</a>
 <a class="recipe-card"
    href="https://hersheyzinc.github.io/recipe-archive.github.io/focaccia.html"
    data-title="focaccia"
    data-category="baking">
 
-    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/images/foccacia1.jpg">
+
+    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/foccacia/thumbnail.jpg" alt="Focaccia">
 
     <div class="recipe-info">
         <h3>Focaccia</h3>
-        <span class="tag">baking</span>
+        <span class="tag tag-baking">
+            baking
+        </span>
         <p><p>Focaccia</p></p>
     </div>
 
@@ -40,11 +67,14 @@
    data-title="salt bread"
    data-category="baking">
 
-    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/images/saltbread2.jpg">
+
+    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/salt-bread/thumbnail.jpg" alt="Salt Bread">
 
     <div class="recipe-info">
         <h3>Salt Bread</h3>
-        <span class="tag">baking</span>
+        <span class="tag tag-baking">
+            baking
+        </span>
         <p><p>Salt Bread</p></p>
     </div>
 
@@ -54,11 +84,14 @@
    data-title="chocolate chip cookies"
    data-category="baking">
 
-    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/images/test.jpg">
+
+    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/chocolate-chip-cookie/thumbnail.jpg" alt="Chocolate Chip Cookies">
 
     <div class="recipe-info">
         <h3>Chocolate Chip Cookies</h3>
-        <span class="tag">baking</span>
+        <span class="tag tag-baking">
+            baking
+        </span>
         <p><p>Chewy chocolate chip cookies</p></p>
     </div>
 
@@ -68,11 +101,14 @@
    data-title="lemon sorbet"
    data-category="creami">
 
-    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/images/test.jpg">
+
+    <img class="recipe-thumb" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/lemon-sorbet/thumbnail.jpg" alt="Lemon Sorbet">
 
     <div class="recipe-info">
         <h3>Lemon Sorbet</h3>
-        <span class="tag">creami</span>
+        <span class="tag tag-creami">
+            creami
+        </span>
         <p><p>Milky lemon sorbet that tastes like yakult</p></p>
     </div>
 
@@ -81,31 +117,37 @@
 </div>
 
 <script>
-const searchBox = document.getElementById("searchBox");
-const cards = document.querySelectorAll(".recipe-card");
+    const searchBox = document.getElementById("searchBox");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const cards = document.querySelectorAll(".recipe-card");
 
-searchBox.addEventListener("input", function () {
-    const query = this.value.toLowerCase();
+    function filterRecipes() {
+        const query = searchBox.value.toLowerCase();
+        const selected = categoryFilter.value;
 
-    cards.forEach(card => {
-        const title = card.dataset.title;
-        const category = card.dataset.category;
+        cards.forEach(card => {
+            const title = card.dataset.title;
+            const category = card.dataset.category;
 
-        card.style.display =
-            (title.includes(query) || category.includes(query))
-            ? "block"
-            : "none";
-    });
-});
+            const matchesSearch =
+                title.includes(query) || category.includes(query);
+
+            const matchesCategory =
+                selected === "" || category === selected;
+
+            card.style.display =
+                matchesSearch && matchesCategory
+                ? "block"
+                : "none";
+        });
+    }
+
+    searchBox.addEventListener("input", filterRecipes);
+    categoryFilter.addEventListener("change", filterRecipes);
 </script>
 
             <footer id="contentinfo" class="footer">
-                    <nav class="pull-right bottom-nav">
-                        <a href="https://hersheyzinc.github.io/recipe-archive.github.io/None">RSS</a>
-                    </nav>
-                    <address id="about" class="vcard body">
-                    &copy; <a href="https://hersheyzinc.github.io/recipe-archive.github.io">Recipe Lab</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
-                    </address><!-- /#about -->
+
             </footer><!-- /#contentinfo -->
         </div><!-- container -->
     </body>
