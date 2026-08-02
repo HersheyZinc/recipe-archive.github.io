@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Butter Squares - Recipe Lab</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://hersheyzinc.github.io/recipe-archive.github.io/theme/css/custom.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <h3 class="text-muted"><a href="https://hersheyzinc.github.io/recipe-archive.github.io/index.html">Recipe Lab</a></h3>
+                <h2 class="text-muted"></h2>
+            </div>
+
+<div class="recipe-layout">
+
+    <div class="recipe-main">
+    
+        <h1>Butter Squares</h1>
+    
+        <p><p>Fudgy butter squares</p></p>
+    
+        <p class="tag">baking</p>
+    
+        <h3>Yield</h3>
+    
+        <input id="scale" type="number"
+            value="20"
+            step="1"
+            style="width:60px;">
+    
+        <span id="yield-display">
+        Squares(s)
+        </span>
+
+
+
+
+            <h3>Rectangular Pan Size</h3>
+            <input id="pan-length"
+                type="number"
+                value="9"
+                step="1"
+                style="width:60px;">
+            <span> × </span>
+            <input id="pan-width"
+                type="number"
+                value="13"
+                step="1"
+                style="width:60px;">
+            <span>inch</span>
+
+
+        
+        <h2>Ingredients</h2>
+    
+        <ul id="ingredients" style="list-style: none">
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="260">
+                  <span class="amount">260</span> g all-purpose flour
+                </label>
+            </li>
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="0.5">
+                  <span class="amount">0.5</span> tsp salt
+                </label>
+            </li>
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="227">
+                  <span class="amount">227</span> g unsalted butter (softened)
+                </label>
+            </li>
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="190">
+                  <span class="amount">190</span> g caster sugar
+                </label>
+            </li>
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="1">
+                  <span class="amount">1</span>  egg(s)
+                </label>
+            </li>
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="1">
+                  <span class="amount">1</span> tsp vanilla extract
+                </label>
+            </li>
+            <li>
+                <label>
+                  <input type="checkbox" class="ingredient-checkbox" data-base="10">
+                  <span class="amount">10</span> g raw/coarse sugar
+                </label>
+            </li>
+        </ul>
+    
+    </div>
+    
+    <div class="recipe-image-container">
+
+        <img class="recipe-image" src="https://hersheyzinc.github.io/recipe-archive.github.io/recipes/butter-squares/image.jpg" alt="Butter Squares">
+    </div>
+    
+</div>
+    
+<h2>Instructions</h2>
+    
+<ol>
+<li>Place baking pan in the freezer for at least 2 hours. <em>Do not grease the pan</em>.</li>
+<li>Preheat the oven to 200°C.</li>
+<li>In a mixer, mix the butter, egg, sugar, salt and vanilla together until creamy.</li>
+<li>Add the flour and mix by hand until the mixture holds together in large clumps.</li>
+<li>Press the dough onto the chilled and ungreased baking pan until it is even. Dust the top evenly with raw/coarse sugar.</li>
+<li>Bake for 12-15 minutes until edges turn golden brown.</li>
+<li>Remove from oven and let cool for 5 minutes before cutting the cooked dough into squares.</li>
+</ol>
+
+<script>
+const scaleInput = document.getElementById("scale");
+
+const panRadiusInput = document.getElementById("pan-radius");
+const panLengthInput = document.getElementById("pan-length");
+const panWidthInput = document.getElementById("pan-width");
+
+const ingredientItems = document.querySelectorAll("#ingredients li input.ingredient-checkbox");
+
+
+// --- SAFE PARSER ---
+function safeFloat(value, fallback = 0) {
+    const n = parseFloat(value);
+    return isNaN(n) ? fallback : n;
+}
+
+
+// --- INITIAL VALUES ---
+const originalYield = safeFloat(scaleInput.value, 1);
+
+const originalRadius = panRadiusInput ? safeFloat(panRadiusInput.value, 0) : 0;
+const originalLength = panLengthInput ? safeFloat(panLengthInput.value, 0) : 0;
+const originalWidth = panWidthInput ? safeFloat(panWidthInput.value, 0) : 0;
+
+
+// --- STORE BASE INGREDIENTS ---
+ingredientItems.forEach(input => {
+    input.dataset.baseAmount = safeFloat(input.dataset.base, 0);
+});
+
+
+// --- ROUND PAN ---
+function getRoundModifier() {
+    if (!panRadiusInput || originalRadius === 0) return 1;
+
+    const newRadius = safeFloat(panRadiusInput.value, originalRadius);
+
+    return Math.pow(newRadius / originalRadius, 2);
+}
+
+
+// --- RECTANGULAR PAN ---
+function getRectModifier() {
+    if (!panLengthInput || !panWidthInput) return 1;
+    if (originalLength === 0 || originalWidth === 0) return 1;
+
+    const newL = safeFloat(panLengthInput.value, originalLength);
+    const newW = safeFloat(panWidthInput.value, originalWidth);
+
+    return (newL * newW) / (originalLength * originalWidth);
+}
+
+
+// --- MAIN ---
+function updateIngredients() {
+
+    const desiredYield = safeFloat(scaleInput.value, originalYield);
+
+    const rect = getRectModifier();
+    const round = getRoundModifier();
+
+    const panModifier = rect !== 1 ? rect : round;
+
+    ingredientItems.forEach(input => {
+
+        const li = input.closest("li");
+        const amountSpan = li.querySelector(".amount");
+
+        const base = safeFloat(input.dataset.baseAmount, 0);
+
+        const scaled = (base / originalYield) * desiredYield * panModifier;
+
+        amountSpan.textContent = scaled.toFixed(2);
+    });
+}
+
+
+// --- INIT ---
+updateIngredients();
+
+
+// --- EVENTS ---
+scaleInput.addEventListener("input", updateIngredients);
+
+if (panRadiusInput) {
+    panRadiusInput.addEventListener("input", updateIngredients);
+}
+
+if (panLengthInput) {
+    panLengthInput.addEventListener("input", updateIngredients);
+}
+
+if (panWidthInput) {
+    panWidthInput.addEventListener("input", updateIngredients);
+}
+
+// Checkbox effect
+ingredientItems.forEach(input => {
+    input.addEventListener("change", () => {
+        const li = input.closest("li");
+        if (input.checked) {
+            li.style.textDecoration = "line-through";
+            li.style.opacity = "0.6";
+        } else {
+            li.style.textDecoration = "none";
+            li.style.opacity = "1";
+        }
+    });
+});
+</script>
+
+            <footer id="contentinfo" class="footer">
+
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>
