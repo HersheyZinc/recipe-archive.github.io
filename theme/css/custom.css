@@ -1,3 +1,50 @@
+/* Warm cream palette */
+:root {
+    --page-background: #F7F2E8;
+    --card-background: #FFFCF6;
+    --panel-background: #F0E8DA;
+    --border-color: #DED3C2;
+    --text-color: #382F28;
+    --muted-color: #75695D;
+    --accent-color: #895332;
+    --accent-hover: #653C26;
+}
+
+body {
+    background-color: var(--page-background);
+    color: var(--text-color);
+}
+
+a { color: var(--accent-color); }
+a:hover, a:focus { color: var(--accent-hover); }
+.text-muted { color: var(--muted-color); }
+
+#searchBox, #categoryFilter, #scale, #pan-radius, #pan-length, #pan-width {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+input::placeholder { color: var(--muted-color); opacity: 1; }
+input[type="checkbox"] { accent-color: var(--accent-color); }
+
+button, .btn-primary {
+    background-color: var(--accent-color);
+    color: var(--card-background);
+    border-color: var(--accent-color);
+}
+
+button:hover, button:focus, .btn-primary:hover, .btn-primary:focus {
+    background-color: var(--accent-hover);
+    color: var(--card-background);
+    border-color: var(--accent-hover);
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
 /* =========================
    Recipe Index
    ========================= */
@@ -16,8 +63,8 @@
     text-decoration: none;
     color: inherit;
 
-    background: #fff;
-    border: 1px solid #e5e5e5;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
     border-radius: 16px;
     overflow: hidden;
 
@@ -27,18 +74,20 @@
         border-color 0.18s ease;
 
     box-shadow:
-        0 1px 3px rgba(0,0,0,.05),
-        0 4px 12px rgba(0,0,0,.03);
+        0 1px 3px rgba(56,47,40,.05),
+        0 4px 12px rgba(56,47,40,.03);
 }
 
-.recipe-card:hover {
+.recipe-card:hover,
+.recipe-card:focus {
+    color: var(--text-color);
     transform: translateY(-4px);
 
-    border-color: #d8d8d8;
+    border-color: var(--accent-color);
 
     box-shadow:
-        0 8px 24px rgba(0,0,0,.10),
-        0 2px 6px rgba(0,0,0,.05);
+        0 8px 24px rgba(56,47,40,.10),
+        0 2px 6px rgba(56,47,40,.05);
 }
 
 .recipe-thumb {
@@ -66,7 +115,7 @@
 
 .recipe-info p {
     margin: 0;
-    color: #666;
+    color: var(--muted-color);
     line-height: 1.5;
     font-size: 0.95rem;
 }
@@ -88,24 +137,24 @@
 
     border-radius: 999px;
 
-    background: #f3f4f6;
-    color: #555;
+    background: var(--panel-background);
+    color: var(--text-color);
 }
 
 .tag-baking {
-    background: #92f37ec0;
+    background: var(--panel-background);
 }
 
 .tag-creami {
-    background: #73f3fc;
+    background: var(--panel-background);
 }
 
 .tag-cooking {
-    background: #b60ee9;
+    background: var(--panel-background);
 }
 
 .tag-brewing {
-    background: #b1713d;
+    background: var(--panel-background);
 }
 
 /* =========================
@@ -117,8 +166,8 @@
     position: sticky;
     top: 1.5rem;
 
-    background: #fafafa;
-    border: 1px solid #ececec;
+    background: var(--panel-background);
+    border: 1px solid var(--border-color);
     border-radius: 16px;
 
     padding: 1.5rem;
@@ -157,7 +206,7 @@
 
 #ingredients li {
     padding: 0.45rem 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
 }
 
 #ingredients li:last-child {
@@ -183,7 +232,7 @@
 #pan-radius,
 #pan-length,
 #pan-width {
-    border: 1px solid #d9d9d9;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
 
     padding: 0.35rem 0.5rem;
@@ -195,8 +244,9 @@
 #pan-radius:focus,
 #pan-length:focus,
 #pan-width:focus {
-    outline: none;
-    border-color: #999;
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-color: var(--accent-color);
 }
 
 /* =========================
