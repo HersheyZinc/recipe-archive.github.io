@@ -1,0 +1,25 @@
+{
+  "tool": "Built-in image generation",
+  "images": [
+    {
+      "name": "butter-squares",
+      "prompt": "Use case: photorealistic-natural. A realistic casual smartphone photograph for a personal home recipe archive. Square composition, subject comfortably centered for thumbnail cropping. Ordinary home kitchen counter, available window light, slightly imperfect framing, real textures and modest everyday presentation. Not commercial food photography, no studio lighting, no dramatic bokeh, no elaborate styling, no text, no watermark, no people. Several homemade butter squares on an ordinary white plate: dense pale golden buttery cookie bars, thin golden baked top sprinkled lightly with coarse sugar, slightly uneven square cuts and a few crumbs. No chocolate, no icing, no layered filling."
+    },
+    {
+      "name": "chocolate-chip-cookie",
+      "prompt": "Use case: photorealistic-natural. A realistic casual smartphone photograph for a personal home recipe archive. Square composition, subject comfortably centered for thumbnail cropping. Ordinary home kitchen counter, available window light, slightly imperfect framing, real textures and modest everyday presentation. Not commercial food photography, no studio lighting, no dramatic bokeh, no elaborate styling, no text, no watermark, no people. A small informal pile of homemade chewy chocolate chip cookies on a plain plate, uneven round shapes, golden edges and softer middles, naturally distributed semisweet chocolate chips. A few crumbs on the counter."
+    },
+    {
+      "name": "kombucha",
+      "prompt": "Use case: photorealistic-natural. A realistic casual smartphone photograph for a personal home recipe archive. Square composition, subject comfortably centered for thumbnail cropping. Ordinary home kitchen counter, available window light, slightly imperfect framing, real textures and modest everyday presentation. Not commercial food photography, no studio lighting, no dramatic bokeh, no elaborate styling, no text, no watermark, no people. A clear household glass of plain amber black-tea kombucha beside a simple glass brewing jar partly filled with amber tea and covered with a cloth held by an elastic band. A natural pale tan SCOBY visible at liquid surface in the jar. No fruit, no garnish, no colorful flavoring."
+    },
+    {
+      "name": "lemon-sorbet",
+      "prompt": "Use case: photorealistic-natural. A realistic casual smartphone photograph for a personal home recipe archive. Square composition, subject comfortably centered for thumbnail cropping. Ordinary home kitchen counter, available window light, slightly imperfect framing, real textures and modest everyday presentation. Not commercial food photography, no studio lighting, no dramatic bokeh, no elaborate styling, no text, no watermark, no people. Homemade milky lemon frozen dessert made with yoghurt and milk, off-white very pale cream color, softly scooped with a slightly rough freshly churned texture in a small plain bowl. Ordinary teaspoon beside it. No yellow dye, no mint garnish, no fruit decorations."
+    },
+    {
+      "name": "sugar-wash",
+      "prompt": "Use case: photorealistic-natural. A realistic casual smartphone photograph for a personal home recipe archive. Square composition, subject comfortably centered for thumbnail cropping. Ordinary home kitchen counter, available window light, slightly imperfect framing, real textures and modest everyday presentation. Not commercial food photography, no studio lighting, no dramatic bokeh, no elaborate styling, no text, no watermark, no people. An ordinary translucent food-safe home fermentation bucket containing cloudy pale straw nearly colorless sugar wash, simple fitted lid with a clear plastic fermentation airlock. The liquid visible through translucent bucket walls, small amount of settled yeast. Casual home brewing snapshot in a kitchen corner. No fruit, no amber beer, no distillation equipment, no branding."
+    }
+  ]
+}
