@@ -60,31 +60,41 @@
         <ul id="ingredients" style="list-style: none">
             <li>
                 <label>
-                  <input type="checkbox" class="ingredient-checkbox" data-base="500">
+                  <input type="checkbox" class="ingredient-checkbox" data-base="500"
+                         data-name="bread flour" data-unit="g"
+                         data-note="">
                   <span class="amount">500</span> g bread flour
                 </label>
             </li>
             <li>
                 <label>
-                  <input type="checkbox" class="ingredient-checkbox" data-base="10">
+                  <input type="checkbox" class="ingredient-checkbox" data-base="10"
+                         data-name="salt" data-unit="g"
+                         data-note="">
                   <span class="amount">10</span> g salt
                 </label>
             </li>
             <li>
                 <label>
-                  <input type="checkbox" class="ingredient-checkbox" data-base="5">
+                  <input type="checkbox" class="ingredient-checkbox" data-base="5"
+                         data-name="yeast" data-unit="g"
+                         data-note="">
                   <span class="amount">5</span> g yeast
                 </label>
             </li>
             <li>
                 <label>
-                  <input type="checkbox" class="ingredient-checkbox" data-base="450">
+                  <input type="checkbox" class="ingredient-checkbox" data-base="450"
+                         data-name="water" data-unit="g"
+                         data-note="">
                   <span class="amount">450</span> g water
                 </label>
             </li>
             <li>
                 <label>
-                  <input type="checkbox" class="ingredient-checkbox" data-base="25">
+                  <input type="checkbox" class="ingredient-checkbox" data-base="25"
+                         data-name="olive oil" data-unit="g"
+                         data-note="">
                   <span class="amount">25</span> g olive oil
                 </label>
             </li>
@@ -126,6 +136,10 @@ const panLengthInput = document.getElementById("pan-length");
 const panWidthInput = document.getElementById("pan-width");
 
 const ingredientItems = document.querySelectorAll("#ingredients li input.ingredient-checkbox");
+const ingredientList = document.getElementById("ingredients");
+const shoppingListToggle = document.getElementById("shopping-list-mode");
+const shoppingList = document.getElementById("shopping-ingredients");
+const shoppingGroups = [];
 
 
 // --- SAFE PARSER ---
@@ -147,6 +161,67 @@ const originalWidth = panWidthInput ? safeFloat(panWidthInput.value, 0) : 0;
 ingredientItems.forEach(input => {
     input.dataset.baseAmount = safeFloat(input.dataset.base, 0);
 });
+
+
+// Match only the same ingredient and unit; do not combine different flour types or units.
+function normalizeIngredient(value) {
+    return value.trim().replace(/\s+/g, " ").toLowerCase();
+}
+
+function updateCheckboxStyle(input) {
+    const li = input.closest("li");
+    li.style.textDecoration = input.checked ? "line-through" : "none";
+    li.style.opacity = input.checked ? "0.6" : "1";
+}
+
+function updateShoppingCheckbox(group) {
+    const checkedCount = group.sources.filter(input => input.checked).length;
+    group.checkbox.checked = checkedCount === group.sources.length;
+    group.checkbox.indeterminate = checkedCount > 0 && checkedCount < group.sources.length;
+    updateCheckboxStyle(group.checkbox);
+}
+
+function buildShoppingList() {
+    const groups = new Map();
+
+    ingredientItems.forEach(input => {
+        const name = input.dataset.name;
+        const unit = input.dataset.unit;
+        const key = JSON.stringify([normalizeIngredient(name), normalizeIngredient(unit)]);
+        if (!groups.has(key)) {
+            groups.set(key, { name, unit, sources: [], notes: new Map(), baseAmount: 0 });
+        }
+        const group = groups.get(key);
+        group.sources.push(input);
+        group.baseAmount += safeFloat(input.dataset.baseAmount, 0);
+        const note = input.dataset.note.trim();
+        if (note) group.notes.set(normalizeIngredient(note), note);
+    });
+
+    groups.forEach(group => {
+        const li = document.createElement("li");
+        const label = document.createElement("label");
+        group.checkbox = document.createElement("input");
+        group.checkbox.type = "checkbox";
+        group.checkbox.className = "ingredient-checkbox";
+        group.amountSpan = document.createElement("span");
+        group.amountSpan.className = "amount";
+        const description = [group.unit, group.name, ...group.notes.values()].filter(Boolean).join(" ");
+        label.append(group.checkbox, group.amountSpan, document.createTextNode(" " + description));
+        li.append(label);
+        shoppingList.append(li);
+        shoppingGroups.push(group);
+
+        group.checkbox.addEventListener("change", () => {
+            group.sources.forEach(input => {
+                input.checked = group.checkbox.checked;
+                updateCheckboxStyle(input);
+            });
+            updateShoppingCheckbox(group);
+        });
+        updateShoppingCheckbox(group);
+    });
+}
 
 
 // --- ROUND PAN ---
@@ -192,10 +267,22 @@ function updateIngredients() {
 
         amountSpan.textContent = scaled.toFixed(2);
     });
+
+    shoppingGroups.forEach(group => {
+        const scaled = (group.baseAmount / originalYield) * desiredYield * panModifier;
+        group.amountSpan.textContent = scaled.toFixed(2);
+    });
 }
 
 
 // --- INIT ---
+if (shoppingListToggle) {
+    buildShoppingList();
+    shoppingListToggle.addEventListener("change", () => {
+        ingredientList.hidden = shoppingListToggle.checked;
+        shoppingList.hidden = !shoppingListToggle.checked;
+    });
+}
 updateIngredients();
 
 
@@ -217,14 +304,8 @@ if (panWidthInput) {
 // Checkbox effect
 ingredientItems.forEach(input => {
     input.addEventListener("change", () => {
-        const li = input.closest("li");
-        if (input.checked) {
-            li.style.textDecoration = "line-through";
-            li.style.opacity = "0.6";
-        } else {
-            li.style.textDecoration = "none";
-            li.style.opacity = "1";
-        }
+        updateCheckboxStyle(input);
+        shoppingGroups.forEach(updateShoppingCheckbox);
     });
 });
 </script>

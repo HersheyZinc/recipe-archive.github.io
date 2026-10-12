@@ -199,21 +199,59 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
    Ingredients
    ========================= */
 
-#ingredients {
+.ingredients-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+}
+
+.shopping-list-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-weight: normal;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+#ingredients,
+#shopping-ingredients {
     padding: 0;
     margin: 0;
 }
 
-#ingredients li {
+#ingredients li,
+#shopping-ingredients li {
     padding: 0.45rem 0;
     border-bottom: 1px solid var(--border-color);
 }
 
-#ingredients li:last-child {
+#ingredients li:last-child,
+#shopping-ingredients li:last-child {
     border-bottom: none;
 }
 
-#ingredients label {
+#ingredients .ingredient-subheader {
+    padding: 1.25rem 0 0.5rem;
+    border-bottom: none;
+}
+
+#ingredients .ingredient-subheader:first-child {
+    padding-top: 0;
+}
+
+#ingredients .ingredient-subheader h3 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+#ingredients label,
+#shopping-ingredients label {
     cursor: pointer;
     display: flex;
     gap: 0.6rem;
